@@ -1,0 +1,13 @@
+@mixin flexProperty($x-align, $y-align, $direction, $gap) {
+  display: flex;
+  justify-content: $x-align;
+  align-items: $y-align;
+  flex-direction: $direction;
+  gap: $gap;
+}
+
+@mixin media-md {
+  @media screen and (min-width: 500px) {
+    @content;
+  }
+}

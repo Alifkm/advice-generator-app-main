@@ -1,25 +1,73 @@
-import logo from './logo.svg';
-import './App.css';
+// import './App.css';
+import './scss/App.scss';
+import React from 'react';
+import Card from './components/Card';
+import Loader from './components/Loader';
+import Footer from './components/Footer';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      index: null,
+      advice: "",
+      isLoading: false
+    }
+    this.handleSubmit = this.changeAdvice.bind(this);
+  }
+
+  getRandomInt = (min, max) =>  {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
+
+  setLoader = () => {
+    this.setState({
+      isLoading: true
+    })
+
+    setTimeout(() => 
+    this.setState({
+        isLoading: false
+      })
+      , 
+    1000);
+  }
+
+  async fetchData() {
+    const response = await fetch(`https://api.adviceslip.com/advice/${this.getRandomInt(1, 100)}`);
+    const json = await response.json();
+    this.setState({
+      index: json.slip.id || 0,
+      advice: json.slip.advice || ''
+    })
+  }
+
+  componentDidMount() {
+    this.setLoader();
+    this.fetchData();  
+  }
+
+  changeAdvice() {
+    this.setLoader();
+    this.fetchData();  
+  }
+
+  render() {
+    return (
+      <div className="App"> 
+          <Card 
+            index={this.state.index}
+            advice={this.state.advice}
+            loading={this.state.isLoading}
+            onClick={this.handleSubmit}
+          />
+        {this.state.isLoading && <Loader />} 
+        <Footer />
+      </div>
+    );
+  }
 }
 
 export default App;

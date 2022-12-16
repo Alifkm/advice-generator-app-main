@@ -1,0 +1,106 @@
+@use '../scss/index' as *;
+
+.App {
+  height: 100%;
+  @include flexProperty(center, center, column, null);
+}
+
+.card {
+  position: relative;
+  background-color: $color-dark-grayish-blue;
+  text-align: center;
+  padding: 1.5em 0.75em 1.75em;
+  width: 90%;
+  max-width: 550px;
+  min-height: 200px;
+  border-radius: 0.5em;
+  
+  #{&}__title-wrapper, #{&}__paragraph-wrapper {
+    margin-bottom: 0.75em;
+  }
+
+  #{&}__title {
+    color: $color-neon-green;
+    font-size: 0.75rem;
+    font-family: $font-stack;
+    text-transform: uppercase;
+    letter-spacing: 0.25em;
+  }
+  
+  #{&}__paragraph {
+    color: $color-light-cyan;
+    font-size: 1.45rem;
+  }
+
+  #{&}__dice-icon {
+    @include flexProperty(center, center, null, null);
+    background-color: $color-neon-green;
+    width: 55px;
+    height: 55px;
+    margin-inline: auto;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -27.5px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: box-shadow 0.5s ease-out,
+    transform 0.5s ease-out;
+  }
+}
+
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  padding-bottom: 1em;
+  font-size: 0.825rem;
+  color: $color-grayish-blue;
+}
+
+.loader {
+  position: absolute;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  text-align: center;
+  border: 5px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 5px solid $color-neon-green;
+  width: 50px;
+  height: 50px;
+  -webkit-animation: spin 2s linear infinite; /* Safari */
+  animation: spin 1s linear infinite;
+}
+
+/* Safari */
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@include media-md {
+  .card {
+    padding: 1.5em 0.75em 2em;
+
+    #{&}__title {
+      font-size: 0.825rem;
+    }
+
+    #{&}__paragraph {
+      font-size: 1.75rem;
+    }
+
+    #{&}__dice-icon:hover {
+      cursor: pointer;
+      box-shadow: 0 0 20px $color-neon-green;
+      transform: rotate(180deg);
+    }
+  }
+}
