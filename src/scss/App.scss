@@ -93,6 +93,10 @@
       font-size: 0.825rem;
     }
 
+    #{&}__paragraph-wrapper {
+      padding: 0 1em;
+    }
+
     #{&}__paragraph {
       font-size: 1.75rem;
     }
