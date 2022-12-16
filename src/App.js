@@ -9,8 +9,8 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      index: null,
-      advice: "",
+      index: 117,
+      advice: "It is easy to sit up and take notice, what's difficult is getting up and taking action.",
       isLoading: false
     }
     this.handleSubmit = this.changeAdvice.bind(this);
@@ -42,11 +42,6 @@ class App extends React.Component {
       index: json.slip.id || 0,
       advice: json.slip.advice || ''
     })
-  }
-
-  componentDidMount() {
-    this.setLoader();
-    this.fetchData();  
   }
 
   changeAdvice() {
