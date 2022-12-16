@@ -36,7 +36,7 @@ class App extends React.Component {
   }
 
   async fetchData() {
-    const response = await fetch(`https://api.adviceslip.com/advice/${this.getRandomInt(1, 100)}`);
+    const response = await fetch(`https://api.adviceslip.com/advice/${this.getRandomInt(1, 200)}`);
     const json = await response.json();
     this.setState({
       index: json.slip.id || 0,
